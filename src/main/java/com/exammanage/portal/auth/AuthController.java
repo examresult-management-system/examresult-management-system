@@ -18,6 +18,7 @@ import java.util.Map;
 @CrossOrigin(origins = "*")
 public class AuthController {
 
+
     @Autowired
     private UserRepository userRepository;
 
