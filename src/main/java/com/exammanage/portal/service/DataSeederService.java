@@ -150,4 +150,5 @@ public class DataSeederService {
     private void lecturer(String id,String name,String email,String phone,String dept,String faculty,String spec){ Lecturer l=new Lecturer(); l.setLecturerId(id); l.setName(name); l.setEmail(email); l.setPhone(phone); l.setDepartment(dept); l.setFaculty(faculty); l.setSpecialization(spec); l.setStatus("Active"); lecturerRepository.save(l); ensureUser(name,email,"lecturer123","LECTURER",faculty); }
     private void timetable(String role,String email,String day,String start,String end,String code,String module,String hall,String lecturer,String semester){ Timetable t=new Timetable(); t.setDay(day); t.setStartTime(start); t.setEndTime(end); t.setModuleCode(code); t.setModuleName(module); t.setHall(hall); t.setLecturer(lecturer); t.setSemester(semester); t.setTargetRole(role); t.setTargetEmail(email); timetableRepository.save(t); }
     private void ensureUser(String name,String email,String password,String role,String faculty){ User u=userRepository.findByEmail(email); if(u==null)u=new User(); u.setName(name); u.setEmail(email); u.setPassword(password); u.setRole(role); u.setFaculty(faculty); userRepository.save(u); }
+
 }

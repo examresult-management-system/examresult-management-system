@@ -1,2 +1,2 @@
-package com.exammanage.portal.course;
+package com.exammanage.portal.course;.
 
