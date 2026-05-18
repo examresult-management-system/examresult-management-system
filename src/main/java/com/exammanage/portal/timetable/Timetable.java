@@ -39,4 +39,5 @@ public class Timetable {
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
+    
 }
