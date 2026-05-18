@@ -116,6 +116,7 @@ public class ExamSubmission {
         this.status = status;
     }
 
+
     public void setAnswerSummary(String answerSummary) {
         this.answerSummary = answerSummary;
     }
