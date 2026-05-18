@@ -12,9 +12,8 @@ public class ApiResponse<T> {
     public ApiResponse(boolean success, String message, T data) {
         this.success = success;
         this.message = message;
-        this.data = data;//
+        this.data = data;
     }
-    //GIT PUSH
     public boolean isSuccess() {
         return success;
     }
