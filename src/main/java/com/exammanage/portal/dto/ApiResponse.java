@@ -1,35 +1,41 @@
 package com.exammanage.portal.dto;
 
-public class ProfileUpdateRequest {
+public class ApiResponse<T> {
 
-    private String name;
-    private String email;
-    private String password;
+    private boolean success;
+    private String message;
+    private T data;
 
-    public ProfileUpdateRequest() {
+    public ApiResponse() {
     }
 
-    public String getName() {
-        return name;
+    public ApiResponse(boolean success, String message, T data) {
+        this.success = success;
+        this.message = message;
+        this.data = data;
     }
 
-    public String getEmail() {
-        return email;
+    public boolean isSuccess() {
+        return success;
     }
 
-    public String getPassword() {
-        return password;
+    public String getMessage() {
+        return message;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public T getData() {
+        return data;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setSuccess(boolean success) {
+        this.success = success;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }
