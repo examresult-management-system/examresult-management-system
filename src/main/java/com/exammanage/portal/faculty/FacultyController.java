@@ -28,5 +28,3 @@ public class FacultyController {
                 .orElse(ResponseEntity.notFound().build());
     }
 }
-
-
