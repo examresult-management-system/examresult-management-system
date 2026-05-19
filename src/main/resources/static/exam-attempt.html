@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attempt Exam | ExamPortal</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/exam-attempt.css">
+</head>
+
+<body>
+
+<aside class="sidebar" id="sidebar"></aside>
+<div class="sidebar-backdrop"></div>
+
+<div class="main-wrapper">
+
+    <nav class="top-navbar" id="topNavbar"></nav>
+
+    <main class="main-content attempt-page">
+
+        <div class="attempt-card">
+
+            <div class="attempt-header">
+                <h1 id="examTitle">Attempt Exam</h1>
+                <p id="examInfo">Enter the enrollment key to unlock your exam.</p>
+            </div>
+
+            <div id="timerBox" class="timer-box" style="display:none;">
+                Time Left: <span id="timerText">00:00:00</span>
+            </div>
+
+            <div id="keySection" class="key-section">
+                <input type="text" id="enrollmentKey" class="form-control" placeholder="Enter enrollment key">
+
+                <button type="button" class="primary-btn" id="unlockBtn">
+                    <i class="fas fa-unlock"></i>
+                    Unlock Exam
+                </button>
+            </div>
+
+            <div id="pdfSection" class="pdf-section" style="display:none;">
+                <h3>PDF Exam</h3>
+                <p>Your PDF exam is ready.</p>
+
+                <a id="pdfLink" class="primary-btn pdf-btn" target="_blank">
+                    <i class="fas fa-file-pdf"></i>
+                    Open PDF
+                </a>
+
+                <br><br>
+
+                <button type="button" class="primary-btn" id="finishPdfBtn">
+                    Finish Exam
+                </button>
+            </div>
+
+            <div id="pollSection" class="poll-section" style="display:none;">
+                <div id="questionBox"></div>
+
+                <div class="poll-actions">
+                    <button type="button" class="primary-btn" id="nextBtn">
+                        Next
+                    </button>
+
+                    <button type="button" class="primary-btn" id="submitBtn" style="display:none;">
+                        Submit Exam
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="spinner-overlay" id="spinnerOverlay">
+    <div class="spinner"></div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script src="js/exam-attempt.js"></script>
+
+</body>
+</html>

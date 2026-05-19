@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | ExamPortal</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+<aside class="sidebar" id="sidebar"></aside>
+<div class="sidebar-backdrop"></div>
+<div class="main-wrapper">
+  <nav class="top-navbar" id="topNavbar"></nav>
+  <main class="main-content student-dashboard-page">
+    <div class="student-page-title">
+      <h1>Admin Dashboard</h1>
+      <p>Welcome back, <span id="welcomeName">Admin</span></p>
+    </div>
+
+    <section class="student-banner">
+      <div class="student-banner-top">
+        <div><div class="student-banner-label">Admin Portal</div><h2>Exam Management Control Center</h2></div>
+        <div class="student-banner-icon"><i class="fas fa-user-shield"></i></div>
+      </div>
+    </section>
+
+    <section class="stats-grid student-stats-grid">
+      <a href="students.html" class="stat-card student-stat-card"><div class="stat-icon blue"><i class="fas fa-user-graduate"></i></div><div class="stat-info"><h3 id="statStudents">0</h3><p>Students</p></div></a>
+      <a href="lecturers.html" class="stat-card student-stat-card"><div class="stat-icon green"><i class="fas fa-chalkboard-teacher"></i></div><div class="stat-info"><h3 id="statLecturers">0</h3><p>Lecturers</p></div></a>
+      <a href="courses.html" class="stat-card student-stat-card"><div class="stat-icon orange"><i class="fas fa-book"></i></div><div class="stat-info"><h3 id="statCourses">0</h3><p>Courses</p></div></a>
+      <a href="exams.html" class="stat-card student-stat-card"><div class="stat-icon red"><i class="fas fa-file-alt"></i></div><div class="stat-info"><h3 id="statExams">0</h3><p>Exams</p></div></a>
+    </section>
+
+    <section class="student-dashboard-grid">
+      <div class="card student-card">
+        <div class="student-card-header"><h3><i class="fas fa-bolt"></i> Quick Actions</h3></div>
+        <div class="quick-actions">
+          <a href="students.html" class="quick-action-btn"><i class="fas fa-user-plus"></i> Manage Students</a>
+          <a href="lecturers.html" class="quick-action-btn"><i class="fas fa-user-tie"></i> Manage Lecturers</a>
+          <a href="timetables.html" class="quick-action-btn"><i class="fas fa-calendar-alt"></i> Edit Timetables</a>
+          <a href="create-exam.html" class="quick-action-btn"><i class="fas fa-plus-circle"></i> Create Exam</a>
+        </div>
+      </div>
+      <div class="card student-card" id="upcomingExamsContainer">
+        <div class="student-card-header"><h3><i class="fas fa-calendar-day"></i> Upcoming Exams</h3><a href="exams.html" class="student-small-btn">View All</a></div>
+        <ul class="upcoming-list" id="upcomingExamsList"></ul>
+      </div>
+    </section>
+
+    <section class="student-dashboard-grid">
+      <div class="card student-card">
+        <div class="student-card-header"><h3><i class="fas fa-users"></i> Recent Students</h3><a href="students.html" class="student-small-btn">View All</a></div>
+        <div class="table-wrapper"><table class="data-table recent-table"><thead><tr><th>Student</th><th>Course</th><th>Faculty</th><th>Status</th></tr></thead><tbody id="recentStudentsBody"></tbody></table></div>
+      </div>
+      <div class="card student-card">
+        <div class="student-card-header"><h3><i class="fas fa-history"></i> Recent Activity</h3></div>
+        <ul class="activity-list" id="activityList"></ul>
+      </div>
+    </section>
+
+    <section class="card student-card">
+      <div class="student-card-header"><h3><i class="fas fa-chart-bar"></i> Enrollment by Faculty</h3></div>
+      <div class="chart-container"><canvas id="enrollmentChart"></canvas></div>
+      <div class="chart-legend" id="enrollmentLegend"></div>
+    </section>
+  </main>
+</div>
+<div class="toast-container" id="toastContainer"></div>
+<div class="spinner-overlay" id="spinnerOverlay"><div class="spinner"></div></div>
+<script>
+const token=localStorage.getItem('token');const userText=localStorage.getItem('user');if(!token||!userText){window.location.href='login.html'}try{const u=JSON.parse(userText);if(u.role)localStorage.setItem('userRole',u.role.toUpperCase());if(String(u.role||'').toUpperCase()!=='ADMIN')window.location.href='login.html'}catch(e){localStorage.clear();window.location.href='login.html'}
+</script>
+<script src="js/api.js"></script><script src="js/main.js"></script><script src="js/dashboard.js"></script>
+</body>
+</html>

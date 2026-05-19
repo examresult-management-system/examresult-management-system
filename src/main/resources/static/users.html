@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Users | ExamPortal</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar"></aside>
+
+<div class="sidebar-backdrop"></div>
+
+<div class="main-wrapper">
+
+  <!-- TOP NAVBAR -->
+  <nav class="top-navbar" id="topNavbar"></nav>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <!-- TOOLBAR -->
+    <div class="page-toolbar">
+
+      <div class="toolbar-search">
+
+        <div class="navbar-search" style="width:100%">
+
+          <i class="fas fa-search"></i>
+
+          <input
+                  type="text"
+                  id="searchInput"
+                  placeholder="Search users..."
+          >
+
+        </div>
+
+      </div>
+
+      <div class="toolbar-filters">
+
+        <button
+                class="btn btn-primary"
+                id="addUserBtn"
+        >
+
+          <i class="fas fa-plus"></i>
+          Add User
+
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- USERS TABLE -->
+    <div class="card">
+
+      <div class="table-wrapper">
+
+        <table class="data-table">
+
+          <thead>
+
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+
+          </thead>
+
+          <tbody id="usersBody">
+
+          <tr>
+
+            <td>1</td>
+
+            <td>Admin User</td>
+
+            <td>admin@gmail.com</td>
+
+            <td>
+              <span class="badge badge-danger">
+                ADMIN
+              </span>
+            </td>
+
+            <td>
+              <span class="badge badge-success">
+                Active
+              </span>
+            </td>
+
+            <td>
+
+              <button class="btn btn-sm btn-primary">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>2</td>
+
+            <td>John Student</td>
+
+            <td>student@gmail.com</td>
+
+            <td>
+              <span class="badge badge-primary">
+                STUDENT
+              </span>
+            </td>
+
+            <td>
+              <span class="badge badge-success">
+                Active
+              </span>
+            </td>
+
+            <td>
+
+              <button class="btn btn-sm btn-primary">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+          <tr>
+
+            <td>3</td>
+
+            <td>Alan Lecturer</td>
+
+            <td>lecturer@gmail.com</td>
+
+            <td>
+              <span class="badge badge-warning">
+                LECTURER
+              </span>
+            </td>
+
+            <td>
+              <span class="badge badge-success">
+                Active
+              </span>
+            </td>
+
+            <td>
+
+              <button class="btn btn-sm btn-primary">
+                Edit
+              </button>
+
+            </td>
+
+          </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+      <div
+              class="pagination"
+              id="usersPagination"
+      ></div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<!-- USER MODAL -->
+<div
+        class="modal-overlay"
+        id="userModalOverlay"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <h3 id="userModalTitle">
+        Add User
+      </h3>
+
+      <button
+              class="modal-close"
+              id="userModalClose"
+      >
+
+        <i class="fas fa-times"></i>
+
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <form id="userForm">
+
+        <input
+                type="hidden"
+                id="userId"
+        >
+
+        <!-- NAME -->
+        <div class="form-group">
+
+          <label for="userName">
+            Full Name
+          </label>
+
+          <input
+                  type="text"
+                  class="form-control"
+                  id="userName"
+                  placeholder="Enter full name"
+          >
+
+        </div>
+
+        <!-- EMAIL -->
+        <div class="form-group">
+
+          <label for="userEmail">
+            Email
+          </label>
+
+          <input
+                  type="email"
+                  class="form-control"
+                  id="userEmail"
+                  placeholder="Enter email"
+          >
+
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="form-group">
+
+          <label for="userPassword">
+            Password
+          </label>
+
+          <input
+                  type="password"
+                  class="form-control"
+                  id="userPassword"
+                  placeholder="Enter password"
+          >
+
+        </div>
+
+        <!-- ROLE -->
+        <div class="form-group">
+
+          <label for="userRole">
+            Role
+          </label>
+
+          <select
+                  class="form-control"
+                  id="userRole"
+          >
+
+            <option value="ADMIN">
+              ADMIN
+            </option>
+
+            <option value="LECTURER">
+              LECTURER
+            </option>
+
+            <option value="STUDENT">
+              STUDENT
+            </option>
+
+          </select>
+
+        </div>
+
+        <!-- STATUS -->
+        <div class="form-group">
+
+          <label for="userStatus">
+            Status
+          </label>
+
+          <select
+                  class="form-control"
+                  id="userStatus"
+          >
+
+            <option value="Active">
+              Active
+            </option>
+
+            <option value="Inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+              class="btn btn-secondary"
+              id="userCancel"
+      >
+        Cancel
+      </button>
+
+      <button
+              class="btn btn-primary"
+              id="userSave"
+      >
+        Save User
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- DELETE MODAL -->
+<div
+        class="modal-overlay"
+        id="deleteModalOverlay"
+>
+
+  <div class="modal modal-sm">
+
+    <div class="modal-body text-center">
+
+      <div class="delete-icon">
+
+        <i class="fas fa-exclamation-triangle"></i>
+
+      </div>
+
+      <h3>
+        Confirm Delete
+      </h3>
+
+      <p>
+        Are you sure you want to delete this user?
+      </p>
+
+    </div>
+
+    <div class="modal-footer justify-center">
+
+      <button
+              class="btn btn-secondary"
+              id="deleteCancel"
+      >
+        Cancel
+      </button>
+
+      <button
+              class="btn btn-danger"
+              id="deleteConfirm"
+      >
+        Delete
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- TOAST -->
+<div
+        class="toast-container"
+        id="toastContainer"
+></div>
+
+<!-- SPINNER -->
+<div
+        class="spinner-overlay"
+        id="spinnerOverlay"
+>
+
+  <div class="spinner"></div>
+
+</div>
+
+<!-- AUTH CHECK -->
+<script>
+const token=localStorage.getItem('token');const userText=localStorage.getItem('user');if(!token||!userText){window.location.href='login.html'}try{const u=JSON.parse(userText);if(u.role)localStorage.setItem('userRole',u.role.toUpperCase());if(String(u.role||'').toUpperCase()!=='ADMIN')window.location.href='login.html'}catch(e){localStorage.clear();window.location.href='login.html'}
+</script>
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script src="js/users.js"></script>
+
+</body>
+</html>
