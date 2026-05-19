@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results | ExamPortal</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<aside class="sidebar" id="sidebar"></aside>
+<div class="sidebar-backdrop"></div>
+
+<div class="main-wrapper">
+  <nav class="top-navbar" id="topNavbar"></nav>
+
+  <main class="main-content results-page">
+
+    <div class="result-page-title">
+      <h1 id="resultsTitle">Results</h1>
+      <p id="resultsSubtitle">View published exam marks and grades.</p>
+    </div>
+
+    <button class="download-result-btn" onclick="window.print()">
+      <i class="fas fa-download"></i>
+      Download Result Sheet
+    </button>
+
+    <div class="result-sheet-card">
+
+      <div class="result-sheet-header" id="resultSheetHeader">
+        Results Summary
+      </div>
+
+      <div class="result-table-wrapper">
+        <table class="result-sheet-table">
+          <thead id="resultsTableHead"></thead>
+          <tbody id="resultsBody"></tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+</div>
+
+
+<div class="modal-overlay" id="resultModalOverlay">
+  <div class="modal" style="max-width:720px">
+    <div class="modal-header">
+      <h2>Edit Result / PDF Mark</h2>
+      <button class="modal-close" id="resultModalClose"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group"><label>Student ID</label><input id="resultStudentId" class="form-input"></div>
+        <div class="form-group"><label>Student Name</label><input id="resultStudentName" class="form-input"></div>
+        <div class="form-group"><label>Module Code</label><input id="resultModuleCode" class="form-input"></div>
+        <div class="form-group"><label>Module / Exam</label><input id="resultModuleName" class="form-input"></div>
+        <div class="form-group"><label>Marks</label><input id="resultMarks" type="number" min="0" max="100" step="0.01" class="form-input"></div>
+        <div class="form-group"><label>Grade</label><input id="resultGrade" class="form-input"></div>
+        <div class="form-group"><label>Status</label><select id="resultStatus" class="form-input"><option>Pending</option><option>Pass</option><option>Fail</option><option>Finished</option><option>Graded</option></select></div>
+        <div class="form-group"><label>Semester</label><input id="resultSemester" class="form-input"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" id="resultCancel">Cancel</button>
+      <button class="btn btn-primary" id="resultSave">Save Result</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="spinner-overlay" id="spinnerOverlay">
+  <div class="spinner"></div>
+</div>
+
+<script>
+  const token = localStorage.getItem("token");
+  const userText = localStorage.getItem("user");
+
+  if (!token || !userText) {
+    window.location.href = "login.html";
+  }
+
+  let user = {};
+
+  try {
+    user = JSON.parse(userText);
+  } catch (e) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "login.html";
+  }
+
+  if (user.role) {
+    localStorage.setItem("userRole", user.role.toUpperCase());
+  }
+</script>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script src="js/results.js"></script>
+
+</body>
+</html>

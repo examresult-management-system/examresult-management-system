@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Dashboard | ExamPortal</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<aside class="sidebar" id="sidebar"></aside>
+<div class="sidebar-backdrop"></div>
+
+<div class="main-wrapper">
+
+  <nav class="top-navbar" id="topNavbar"></nav>
+
+  <main class="main-content student-dashboard-page">
+
+    <div class="student-page-title">
+      <h1>Student Dashboard</h1>
+      <p>Welcome back, <span id="welcomeName">Student</span></p>
+    </div>
+
+    <section class="student-banner">
+      <div class="student-banner-top">
+        <div>
+          <div class="student-banner-label">Student Portal</div>
+          <h2>Exam Management Overview</h2>
+        </div>
+
+        <div class="student-banner-icon">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid student-stats-grid">
+
+      <a href="exams.html" class="stat-card student-stat-card">
+        <div class="stat-icon blue">
+          <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="statMyExams">0</h3>
+          <p>My Exams</p>
+        </div>
+      </a>
+
+      <a href="results.html" class="stat-card student-stat-card">
+        <div class="stat-icon green">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="statAvgScore">0%</h3>
+          <p>Average Score</p>
+        </div>
+      </a>
+
+      <a href="timetables.html" class="stat-card student-stat-card">
+        <div class="stat-icon orange">
+          <i class="fas fa-calendar-check"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="statUpcoming">0</h3>
+          <p>Upcoming Exams</p>
+        </div>
+      </a>
+
+      <a href="announcements.html" class="stat-card student-stat-card">
+        <div class="stat-icon red">
+          <i class="fas fa-bullhorn"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="statAnnouncements">0</h3>
+          <p>Announcements</p>
+        </div>
+      </a>
+
+    </section>
+
+    <section class="student-dashboard-grid">
+
+      <div class="card student-card" id="upcomingExamsContainer">
+        <div class="student-card-header">
+          <h3>
+            <i class="fas fa-calendar-day"></i>
+            Upcoming Exams
+          </h3>
+
+          <a href="exams.html" class="student-small-btn">
+            View All
+          </a>
+        </div>
+
+        <ul class="upcoming-list" id="upcomingExamsList">
+          <li class="upcoming-item">
+            <div class="upcoming-date">
+              <span class="day">15</span>
+              <span class="month">Jun</span>
+            </div>
+
+            <div class="upcoming-info">
+              <h4>Database Systems Final</h4>
+              <p><i class="fas fa-clock"></i> 09:00 AM • 2 Hours</p>
+            </div>
+
+            <a href="exam-submit.html" class="student-small-btn">Start</a>
+          </li>
+        </ul>
+      </div>
+
+    </section>
+
+    <section class="student-dashboard-grid">
+
+      <div class="card student-card">
+        <div class="student-card-header">
+          <h3>
+            <i class="fas fa-chart-pie"></i>
+            Recent Results
+          </h3>
+
+          <a href="results.html" class="student-small-btn">
+            View All
+          </a>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="data-table recent-table">
+            <thead>
+            <tr>
+              <th>Exam</th>
+              <th>Score</th>
+              <th>Grade</th>
+              <th>Status</th>
+            </tr>
+            </thead>
+
+            <tbody id="recentResultsBody">
+            <tr>
+              <td><strong>Database Systems</strong></td>
+              <td>85%</td>
+              <td>A</td>
+              <td><span class="badge badge-success">Completed</span></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card student-card">
+        <div class="student-card-header">
+          <h3>
+            <i class="fas fa-bullhorn"></i>
+            Latest Announcements
+          </h3>
+
+          <a href="announcements.html" class="student-small-btn">
+            View All
+          </a>
+        </div>
+
+        <div id="recentAnnouncementsList">
+          <div class="announcement-card student-announcement-card">
+            <h4>Final exam timetable released</h4>
+            <p>Please check your updated timetable before the exam week.</p>
+            <div class="announcement-meta">
+              <span><i class="fas fa-user"></i> Admin</span>
+              <span><i class="fas fa-clock"></i> Today</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="spinner-overlay" id="spinnerOverlay">
+  <div class="spinner"></div>
+</div>
+
+<script>
+  const token = localStorage.getItem("token");
+  const userText = localStorage.getItem("user");
+
+  if (!token || !userText) {
+    window.location.href = "login.html";
+  }
+
+  let user = {};
+
+  try {
+    user = JSON.parse(userText);
+  } catch (e) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    window.location.href = "login.html";
+  }
+
+  if (user.role) {
+    localStorage.setItem("userRole", user.role.toUpperCase());
+  }
+
+  if (user.role && user.role.toUpperCase() !== "STUDENT") {
+    if (user.role.toUpperCase() === "ADMIN") {
+      window.location.href = "admin-dashboard.html";
+    } else if (user.role.toUpperCase() === "LECTURER") {
+      window.location.href = "lecturer-dashboard.html";
+    }
+  }
+</script>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

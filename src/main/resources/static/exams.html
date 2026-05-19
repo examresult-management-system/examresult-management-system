@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Exams | ExamPortal</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+
+<body>
+
+<aside class="sidebar" id="sidebar"></aside>
+<div class="sidebar-backdrop"></div>
+
+<div class="main-wrapper">
+
+  <nav class="top-navbar" id="topNavbar"></nav>
+
+  <main class="main-content exams-page">
+
+    <div class="exam-page-title">
+      <h1>Available Exams</h1>
+      <p>Check your active, upcoming, and closed exams.</p>
+    </div>
+
+    <div class="exam-filter-bar">
+
+      <div class="exam-search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search exams...">
+      </div>
+
+      <select id="statusFilter" class="exam-select">
+        <option value="">All Status</option>
+        <option value="Active">Active</option>
+        <option value="Upcoming">Upcoming</option>
+        <option value="Closed">Closed</option>
+        <option value="Completed">Completed</option>
+        <option value="Scheduled">Scheduled</option>
+      </select>
+
+      <select id="typeFilter" class="exam-select">
+        <option value="">All Types</option>
+        <option value="Quiz">Quiz</option>
+        <option value="Midterm">Midterm</option>
+        <option value="Final">Final</option>
+        <option value="Final Exam">Final Exam</option>
+      </select>
+
+    </div>
+
+    <div class="exam-table-card">
+
+      <div class="exam-table-top">
+        <div class="exam-semester">Year 1 | Semester 2</div>
+        <h2>Mid-Term Examination</h2>
+      </div>
+
+      <div class="exam-table-wrapper">
+        <table class="available-exams-table">
+          <thead>
+          <tr>
+            <th>Subject Code</th>
+            <th>Subject Name</th>
+            <th>Location</th>
+            <th>Date and Time</th>
+            <th>Seat No</th>
+            <th>Session No</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+          </thead>
+
+          <tbody id="examsTableBody"></tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="spinner-overlay" id="spinnerOverlay">
+  <div class="spinner"></div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script src="js/exams.js"></script>
+
+</body>
+</html>

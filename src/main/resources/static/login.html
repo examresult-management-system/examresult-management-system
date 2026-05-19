@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | ExamPortal</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+
+<body>
+
+<div class="login-container">
+
+  <div class="left-panel">
+    <div class="left-content">
+      <i class="fas fa-graduation-cap logo-icon"></i>
+      <h1>ExamPortal</h1>
+      <p>University Exam Management System</p>
+
+      <img src="images/login-image.png" class="side-image" alt="Login Image">
+    </div>
+  </div>
+
+  <div class="right-panel">
+
+    <div class="login-box">
+
+      <h2>Welcome Back</h2>
+      <p class="subtitle">Sign in to your account</p>
+
+      <form class="auth-form" id="loginForm" autocomplete="off">
+
+        <div class="input-group">
+          <label for="email">Email Address</label>
+
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" placeholder="Enter your email" required>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" placeholder="Enter your password" required>
+          </div>
+        </div>
+
+        <div class="options">
+          <label>
+            <input type="checkbox">
+            Remember me
+          </label>
+
+          <a href="forgot-password.html">Forgot password?</a>
+        </div>
+
+        <button type="submit" class="login-btn">
+          <i class="fas fa-sign-in-alt"></i>
+          Sign In
+        </button>
+
+      </form>
+
+      <div class="register-link">
+        Don't have an account?
+        <a href="register.html">Register</a>
+      </div>
+
+
+
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+  function fillLogin(email) {
+    document.getElementById("email").value = email;
+    document.getElementById("password").value = "password";
+  }
+</script>
+<script>
+
+  function loginAs(email, password) {
+
+    document.getElementById("email").value = email;
+    document.getElementById("password").value = password;
+
+    document.getElementById("loginForm").dispatchEvent(
+            new Event('submit', {
+              cancelable: true,
+              bubbles: true
+            })
+    );
+  }
+
+</script>
+
+<script src="js/api.js"></script>
+<script src="js/auth.js"></script>
+
+
+</body>
+</html>

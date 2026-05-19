@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lecturer Dashboard | ExamPortal</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+
+  <style>
+    .lecturer-dashboard-page {
+      padding: 24px 32px 32px;
+    }
+
+    .lecturer-page-title {
+      margin-bottom: 24px;
+    }
+
+    .lecturer-page-title h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #061132;
+      margin: 0 0 4px 0;
+    }
+
+    .lecturer-page-title p {
+      font-size: 15px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .lecturer-page-title p span {
+      color: #3b82f6;
+      font-weight: 600;
+    }
+
+    .lecturer-banner {
+      background: #061132;
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lecturer-banner::before {
+      content: '';
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 180px;
+      height: 180px;
+      background: rgba(59, 130, 246, 0.1);
+      border-radius: 50%;
+    }
+
+    .lecturer-banner::after {
+      content: '';
+      position: absolute;
+      bottom: -60px;
+      right: 80px;
+      width: 120px;
+      height: 120px;
+      background: rgba(59, 130, 246, 0.06);
+      border-radius: 50%;
+    }
+
+    .lecturer-banner-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .lecturer-banner-label {
+      display: inline-block;
+      background: rgba(59, 130, 246, 0.2);
+      color: #60a5fa;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .lecturer-banner h2 {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .lecturer-banner-icon {
+      width: 64px;
+      height: 64px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      color: #ffffff;
+    }
+
+    .lecturer-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .lecturer-stat-card {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-decoration: none;
+      border: 1px solid rgba(6, 17, 50, 0.06);
+      box-shadow: 0 1px 3px rgba(6, 17, 50, 0.04);
+      transition: all 0.2s ease;
+    }
+
+    .lecturer-stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(6, 17, 50, 0.08);
+      border-color: rgba(59, 130, 246, 0.2);
+    }
+
+    .lecturer-stat-card .stat-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .lecturer-stat-card .stat-icon.blue {
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+
+    .lecturer-stat-card .stat-icon.green {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+    }
+
+    .lecturer-stat-card .stat-icon.orange {
+      background: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+    }
+
+    .lecturer-stat-card .stat-icon.red {
+      background: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    .lecturer-stat-card .stat-info h3 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #061132;
+      margin: 0 0 2px 0;
+    }
+
+    .lecturer-stat-card .stat-info p {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .lecturer-dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .lecturer-dashboard-grid.quick-actions-row {
+      grid-template-columns: 1fr;
+    }
+
+    .lecturer-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid rgba(6, 17, 50, 0.06);
+      box-shadow: 0 1px 3px rgba(6, 17, 50, 0.04);
+      overflow: hidden;
+    }
+
+    .lecturer-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .lecturer-card-header h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #061132;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lecturer-card-header h3 i {
+      color: #3b82f6;
+      font-size: 18px;
+    }
+
+    .lecturer-small-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(59, 130, 246, 0.08);
+      color: #3b82f6;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .lecturer-small-btn:hover {
+      background: rgba(59, 130, 246, 0.15);
+    }
+
+    .lecturer-quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      padding: 20px 24px;
+    }
+
+    .lecturer-quick-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background: #f8fafc;
+      color: #061132;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s;
+    }
+
+    .lecturer-quick-action-btn:hover {
+      background: #061132;
+      color: #ffffff;
+      border-color: #061132;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(6, 17, 50, 0.15);
+    }
+
+    .lecturer-quick-action-btn i {
+      font-size: 16px;
+      color: #3b82f6;
+      transition: color 0.2s;
+    }
+
+    .lecturer-quick-action-btn:hover i {
+      color: #60a5fa;
+    }
+
+    .lecturer-activity-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .lecturer-activity-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 24px;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background 0.2s;
+    }
+
+    .lecturer-activity-list li:last-child {
+      border-bottom: none;
+    }
+
+    .lecturer-activity-list li:hover {
+      background: #f8fafc;
+    }
+
+    .lecturer-activity-list li i {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .lecturer-activity-list li i.icon-blue {
+      background: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+
+    .lecturer-activity-list li i.icon-green {
+      background: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+    }
+
+    .lecturer-activity-list li i.icon-orange {
+      background: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+    }
+
+    .lecturer-activity-list li span {
+      font-size: 14px;
+      color: #334155;
+    }
+
+    .lecturer-announcement-card {
+      padding: 16px 24px;
+      border-bottom: 1px solid #f1f5f9;
+      transition: background 0.2s;
+    }
+
+    .lecturer-announcement-card:last-child {
+      border-bottom: none;
+    }
+
+    .lecturer-announcement-card:hover {
+      background: #f8fafc;
+    }
+
+    .lecturer-announcement-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #061132;
+      margin: 0 0 6px 0;
+    }
+
+    .lecturer-announcement-card p {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0 0 10px 0;
+      line-height: 1.5;
+    }
+
+    .lecturer-announcement-meta {
+      display: flex;
+      gap: 16px;
+    }
+
+    .lecturer-announcement-meta span {
+      font-size: 12px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    @media (max-width: 1100px) {
+      .lecturer-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .lecturer-dashboard-page {
+        padding: 16px;
+      }
+
+      .lecturer-stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lecturer-dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lecturer-banner-top {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<aside class="sidebar" id="sidebar"></aside>
+<div class="sidebar-backdrop"></div>
+
+<div class="main-wrapper">
+
+  <nav class="top-navbar" id="topNavbar"></nav>
+
+  <main class="main-content lecturer-dashboard-page">
+
+    <div class="lecturer-page-title">
+      <h1>Lecturer Dashboard</h1>
+      <p>Welcome back, <span id="welcomeName">Lecturer</span></p>
+    </div>
+
+    <section class="lecturer-banner">
+      <div class="lecturer-banner-top">
+        <div>
+          <div class="lecturer-banner-label">Lecturer Portal</div>
+          <h2>Academic Management Overview</h2>
+        </div>
+
+        <div class="lecturer-banner-icon">
+          <i class="fas fa-chalkboard-teacher"></i>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats-grid lecturer-stats-grid">
+
+      <a href="modules.html" class="stat-card lecturer-stat-card">
+        <div class="stat-icon blue">
+          <i class="fas fa-book"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="statModules">5</h3>
+          <p>Modules</p>
+        </div>
+      </a>
+
+      <a href="create-exam.html" class="stat-card lecturer-stat-card">
+        <div class="stat-icon green">
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="statExams">12</h3>
+          <p>Create Exams</p>
+        </div>
+      </a>
+
+      <a href="students.html" class="stat-card lecturer-stat-card">
+        <div class="stat-icon orange">
+          <i class="fas fa-user-graduate"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="statStudents">120</h3>
+          <p>Students</p>
+        </div>
+      </a>
+
+      <a href="results.html" class="stat-card lecturer-stat-card">
+        <div class="stat-icon red">
+          <i class="fas fa-chart-bar"></i>
+        </div>
+        <div class="stat-info">
+          <h3 id="statPassRate">85%</h3>
+          <p>Pass Rate</p>
+        </div>
+      </a>
+
+    </section>
+
+    <section class="lecturer-dashboard-grid quick-actions-row">
+
+      <div class="card lecturer-card">
+        <div class="lecturer-card-header">
+          <h3>
+            <i class="fas fa-bolt"></i>
+            Quick Actions
+          </h3>
+        </div>
+
+        <div class="lecturer-quick-actions">
+
+          <a href="modules.html" class="lecturer-quick-action-btn">
+            <i class="fas fa-book"></i>
+            Modules
+          </a>
+
+          <a href="students.html" class="lecturer-quick-action-btn">
+            <i class="fas fa-user-graduate"></i>
+            Students
+          </a>
+
+          <a href="create-exam.html" class="lecturer-quick-action-btn">
+            <i class="fas fa-plus-circle"></i>
+            Create Exam
+          </a>
+
+          <a href="results.html" class="lecturer-quick-action-btn">
+            <i class="fas fa-chart-bar"></i>
+            Results
+          </a>
+
+          <a href="announcements.html" class="lecturer-quick-action-btn">
+            <i class="fas fa-bullhorn"></i>
+            Announcements
+          </a>
+
+        </div>
+      </div>
+
+    </section>
+
+    <section class="lecturer-dashboard-grid">
+
+      <div class="card lecturer-card">
+        <div class="lecturer-card-header">
+          <h3>
+            <i class="fas fa-clock"></i>
+            Recent Activity
+          </h3>
+        </div>
+
+        <ul class="lecturer-activity-list">
+          <li>
+            <i class="fas fa-calendar-check icon-blue"></i>
+            <span>Midterm exam schedule updated.</span>
+          </li>
+
+          <li>
+            <i class="fas fa-chart-bar icon-green"></i>
+            <span>New results uploaded for Database Systems.</span>
+          </li>
+
+          <li>
+            <i class="fas fa-bullhorn icon-orange"></i>
+            <span>Announcement posted for final exams.</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="card lecturer-card">
+        <div class="lecturer-card-header">
+          <h3>
+            <i class="fas fa-bullhorn"></i>
+            Latest Announcements
+          </h3>
+
+          <a href="announcements.html" class="lecturer-small-btn">View All</a>
+        </div>
+
+        <div class="lecturer-announcement-card">
+          <h4>Final exam timetable released</h4>
+          <p>Please check your updated timetable before the exam week.</p>
+
+          <div class="lecturer-announcement-meta">
+            <span><i class="fas fa-user"></i> Admin</span>
+            <span><i class="fas fa-clock"></i> Today</span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<div class="toast-container" id="toastContainer"></div>
+
+<div class="spinner-overlay" id="spinnerOverlay">
+  <div class="spinner"></div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/main.js"></script>
+<script src="js/dashboard.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const token = localStorage.getItem("token");
+    const userText = localStorage.getItem("user");
+
+    if (!token || !userText) {
+      window.location.href = "login.html";
+      return;
+    }
+
+    let user = {};
+
+    try {
+      user = JSON.parse(userText);
+    } catch (e) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("userRole");
+      window.location.href = "login.html";
+      return;
+    }
+
+    if (user.role) {
+      localStorage.setItem("userRole", user.role.toUpperCase());
+    }
+
+    if (user.role && user.role.toUpperCase() !== "LECTURER") {
+      if (user.role.toUpperCase() === "ADMIN") {
+        window.location.href = "admin-dashboard.html";
+      } else {
+        window.location.href = "student-dashboard.html";
+      }
+      return;
+    }
+
+    const welcomeName = document.getElementById("welcomeName");
+    if (welcomeName) {
+      welcomeName.textContent = user.name || "Lecturer";
+    }
+
+    initPage("Dashboard");
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register | ExamPortal</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #f8fafc;
+      min-height: 100vh;
+      display: flex;
+    }
+
+    .left-panel {
+      width: 42%;
+      background: #061132;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 48px 56px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left-panel::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      right: -100px;
+      width: 400px;
+      height: 400px;
+      background: rgba(59, 130, 246, 0.08);
+      border-radius: 50%;
+    }
+
+    .left-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      left: -80px;
+      width: 300px;
+      height: 300px;
+      background: rgba(59, 130, 246, 0.05);
+      border-radius: 50%;
+    }
+
+    .brand {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(59, 130, 246, 0.15);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #60a5fa;
+    }
+
+    .brand-text h1 {
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .brand-text p {
+      color: rgba(255,255,255,0.5);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .features {
+      position: relative;
+      z-index: 1;
+      margin-top: auto;
+      margin-bottom: auto;
+      padding: 20px 0;
+    }
+
+    .features h2 {
+      color: #ffffff;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+
+    .features p {
+      color: rgba(255,255,255,0.6);
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    .feature-list {
+      list-style: none;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+      color: rgba(255,255,255,0.85);
+      font-size: 15px;
+    }
+
+    .feature-list li i {
+      width: 36px;
+      height: 36px;
+      background: rgba(59, 130, 246, 0.12);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #60a5fa;
+      flex-shrink: 0;
+    }
+
+    .left-footer {
+      position: relative;
+      z-index: 1;
+      color: rgba(255,255,255,0.35);
+      font-size: 12px;
+    }
+
+    .right-panel {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: #f8fafc;
+    }
+
+    .form-card {
+      width: 100%;
+      max-width: 480px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 40px 44px;
+      box-shadow: 0 4px 24px rgba(6, 17, 50, 0.06), 0 1px 3px rgba(6, 17, 50, 0.04);
+      border: 1px solid rgba(6, 17, 50, 0.06);
+    }
+
+    .form-header {
+      margin-bottom: 32px;
+    }
+
+    .form-header h2 {
+      color: #061132;
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .form-header p {
+      color: #64748b;
+      font-size: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label,
+    .role-label-text {
+      display: block;
+      color: #061132;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      letter-spacing: 0.3px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 15px;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 13px 16px 13px 44px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #061132;
+      background: #ffffff;
+      transition: all 0.2s ease;
+      outline: none;
+    }
+
+    .form-control::placeholder {
+      color: #94a3b8;
+    }
+
+    .form-control:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.08);
+    }
+
+    select.form-control {
+      appearance: none;
+      cursor: pointer;
+    }
+
+    .role-selector {
+      display: flex;
+      gap: 10px;
+    }
+
+    .role-option {
+      flex: 1;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .role-option input {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .role-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 8px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 12px;
+      transition: all 0.2s ease;
+      background: #ffffff;
+    }
+
+    .role-option input:checked + .role-box {
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.04);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.08);
+    }
+
+    .role-box i {
+      font-size: 20px;
+      color: #94a3b8;
+    }
+
+    .role-option input:checked + .role-box i,
+    .role-option input:checked + .role-box span {
+      color: #3b82f6;
+    }
+
+    .role-box span {
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      background: #061132;
+      color: #ffffff;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .btn-primary:hover {
+      background: #0f1f4d;
+    }
+
+    .form-footer {
+      text-align: center;
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .form-footer p {
+      color: #64748b;
+      font-size: 14px;
+    }
+
+    .form-footer a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    @media (max-width: 900px) {
+      body {
+        flex-direction: column;
+      }
+
+      .left-panel {
+        width: 100%;
+        padding: 32px;
+        min-height: 280px;
+      }
+
+      .right-panel {
+        padding: 24px;
+      }
+
+      .form-card {
+        padding: 28px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .role-selector {
+        flex-direction: column;
+      }
+
+      .form-card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="left-panel">
+  <div class="brand">
+    <div class="brand-icon">
+      <i class="fas fa-graduation-cap"></i>
+    </div>
+    <div class="brand-text">
+      <h1>ExamPortal</h1>
+      <p>University Exam Management</p>
+    </div>
+  </div>
+
+  <div class="features">
+    <h2>Start your journey with us</h2>
+    <p>Join thousands of students and lecturers managing exams seamlessly.</p>
+
+    <ul class="feature-list">
+      <li><i class="fas fa-calendar-check"></i><span>Smart exam scheduling & timetables</span></li>
+      <li><i class="fas fa-bell"></i><span>Real-time announcements & alerts</span></li>
+      <li><i class="fas fa-chart-line"></i><span>Track results and performance</span></li>
+      <li><i class="fas fa-shield-alt"></i><span>Secure role-based access</span></li>
+    </ul>
+  </div>
+
+  <div class="left-footer">
+    &copy; 2026 ExamPortal. All rights reserved.
+  </div>
+</div>
+
+<div class="right-panel">
+  <div class="form-card">
+    <div class="form-header">
+      <h2>Create Account</h2>
+      <p>Fill in your details to get started</p>
+    </div>
+
+    <form id="registerForm" autocomplete="off">
+
+      <div class="form-group">
+        <label for="name">Full Name</label>
+        <div class="input-wrapper">
+          <i class="fas fa-user"></i>
+          <input type="text" class="form-control" id="name" placeholder="Enter your full name" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <div class="input-wrapper">
+          <i class="fas fa-envelope"></i>
+          <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <span class="role-label-text">Select Role</span>
+        <div class="role-selector">
+
+          <label class="role-option">
+            <input type="radio" name="role" value="STUDENT" checked>
+            <div class="role-box">
+              <i class="fas fa-user-graduate"></i>
+              <span>Student</span>
+            </div>
+          </label>
+
+          <label class="role-option">
+            <input type="radio" name="role" value="LECTURER">
+            <div class="role-box">
+              <i class="fas fa-chalkboard-teacher"></i>
+              <span>Lecturer</span>
+            </div>
+          </label>
+
+          <label class="role-option">
+            <input type="radio" name="role" value="ADMIN">
+            <div class="role-box">
+              <i class="fas fa-user-shield"></i>
+              <span>Admin</span>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <div class="form-group" id="facultyGroup">
+        <label for="faculty">Select Faculty</label>
+        <div class="input-wrapper">
+          <i class="fas fa-building-columns"></i>
+          <select class="form-control" id="faculty">
+            <option value="">Loading faculties...</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-wrapper">
+          <i class="fas fa-lock"></i>
+          <input type="password" class="form-control" id="password" placeholder="Create a password" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <div class="input-wrapper">
+          <i class="fas fa-lock"></i>
+          <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-primary">
+        <i class="fas fa-user-plus"></i>
+        Create Account
+      </button>
+
+    </form>
+
+    <div class="form-footer">
+      <p>Already have an account? <a href="/login.html">Sign in</a></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  const roleInputs = document.querySelectorAll("input[name='role']");
+  const facultyGroup = document.getElementById("facultyGroup");
+  const facultySelect = document.getElementById("faculty");
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  async function loadRegisterFaculties() {
+    facultySelect.innerHTML = '<option value="">Loading faculties...</option>';
+    try {
+      const response = await fetch(window.location.origin + "/api/faculties");
+      const faculties = await response.json();
+      if (!response.ok) {
+        throw new Error("Faculty loading failed");
+      }
+
+      const names = (faculties || [])
+        .filter(f => !f.status || String(f.status).toLowerCase() === "active")
+        .map(f => f.name)
+        .filter(Boolean);
+
+      facultySelect.innerHTML = '<option value="">Select your faculty</option>' +
+        names.map(name => `<option value="${escapeHtml(name)}">${escapeHtml(name)}</option>`).join('');
+
+      if (names.length === 0) {
+        facultySelect.innerHTML = '<option value="">No active faculties found</option>';
+      }
+    } catch (error) {
+      console.error(error);
+      facultySelect.innerHTML = '<option value="">Failed to load faculties</option>';
+      alert("Could not load faculties. Please run the backend and try again.");
+    }
+  }
+
+  function toggleFacultyDropdown() {
+    const role = document.querySelector("input[name='role']:checked").value;
+
+    if (role === "STUDENT") {
+      facultyGroup.style.display = "block";
+      facultySelect.required = true;
+    } else {
+      facultyGroup.style.display = "none";
+      facultySelect.required = false;
+      facultySelect.value = "";
+    }
+  }
+
+  roleInputs.forEach(function(input) {
+    input.addEventListener("change", toggleFacultyDropdown);
+  });
+
+  loadRegisterFaculties();
+  toggleFacultyDropdown();
+
+  document.getElementById("registerForm").addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const confirmPassword = document.getElementById("confirmPassword").value.trim();
+    const role = document.querySelector("input[name='role']:checked").value;
+    const faculty = facultySelect.value;
+
+    if (!name || !email || !password || !confirmPassword) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    if (role === "STUDENT" && !faculty) {
+      alert("Please select your faculty.");
+      return;
+    }
+
+    try {
+      const response = await fetch(window.location.origin + "/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: name,
+          email: email,
+          password: password,
+          role: role,
+          faculty: role === "STUDENT" ? faculty : null
+        })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || "Registration failed");
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+        localStorage.setItem("userRole", String(data.user.role || "").toUpperCase());
+
+      alert("Registration successful!");
+      redirectByRole(data.user.role);
+
+    } catch (error) {
+      console.error(error);
+      alert("Server connection failed.");
+    }
+  });
+
+  function redirectByRole(role) {
+    role = String(role).toUpperCase();
+
+    if (role === "ADMIN") {
+      window.location.href = "/admin-dashboard.html";
+      return;
+    }
+
+    if (role === "LECTURER") {
+      window.location.href = "/lecturer-dashboard.html";
+      return;
+    }
+
+    if (role === "STUDENT") {
+      window.location.href = "/student-dashboard.html";
+      return;
+    }
+
+    window.location.href = "/login.html";
+  }
+</script>
+
+</body>
+</html>
